@@ -1,5 +1,3 @@
-package manager;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -21,7 +19,8 @@ public class ReceiverUDP {
                 System.arraycopy(incoming.getData(), 0, data, 0, data.length);
                 // Pass the data to processor:
                 //new DataProcessor(data).start();
-                System.out.println(data);
+
+                System.out.println(new String(data));
             }
         } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());
