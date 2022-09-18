@@ -1,5 +1,3 @@
-package manager;
-
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

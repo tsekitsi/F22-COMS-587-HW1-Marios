@@ -1,5 +1,3 @@
-package manager;
-
 public class BeaconListener extends Thread {
     public int LISTENING_PORT;
 
