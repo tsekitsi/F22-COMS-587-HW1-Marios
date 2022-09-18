@@ -5,7 +5,7 @@ import java.net.SocketException;
 
 public class ReceiverUDP {
     public static void listen(int LISTENING_PORT) {
-        byte[] buffer = new byte[24];
+        byte[] buffer = new byte[16];
         // Construct empty DatagramPacket object:
         DatagramPacket incoming = new DatagramPacket(buffer, buffer.length);
 

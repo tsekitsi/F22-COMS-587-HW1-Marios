@@ -17,7 +17,7 @@ struct BEACON {
 int main(int argc, char *argv[]) {
     int s;
     struct sockaddr_in udpServer;
-    char buf[24];
+    char buf[16]; // (8 bytes for the header) 16 bytes for the payload.
 
     // Convert IP address from string to in_addr_t:
     in_addr_t ipOfUDPServerAsInAddrT;
