@@ -28,7 +28,7 @@ public class ReceiverUDP {
     }
 
     public static void main(String [] args) {
-        listen(4444);
+        listen(Integer.parseInt(args[0]));
     }
 }
 
