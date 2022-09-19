@@ -5,40 +5,11 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+void *processRequest(void *client_socket);
 int receiveFully(int client_socket, char *buffer, int length);
 void printBinaryArray(char *buffer, int length);
 int toInteger32(char *bytes);
 void convertUpperCase(char *buffer, int length);
-
-void *processRequest(void *client_socket)
-{
-    printf("processing client request %d \n", *client_socket);
-
-    // get the command length
-    char packet_length_bytes[4];
-    receiveFully(client_socket, packet_length_bytes, 4);
-
-    printBinaryArray(packet_length_bytes, 4);
-
-    int packet_length = toInteger32(packet_length_bytes);
-    printf("packet_length_bytes = %d", packet_length);
-
-    // allocate buffer to receive the data
-    char *buffer = (char *)malloc(packet_length);
-    receiveFully(client_socket, buffer, packet_length);
-
-    // convert to upper case
-    convertUpperCase(buffer, packet_length);
-
-    // send back
-    send(client_socket, packet_length_bytes, 4, 0); // 4 bytes first
-    send(client_socket, buffer, packet_length, 0);
-
-    // release buffer
-    free(buffer);
-
-    printf("done with client request %d \n", client_socket);
-}
 
 int main()
 {
@@ -79,6 +50,36 @@ int main()
         pthread_t thread;
         pthread_create( &thread, NULL, processRequest, (void *) &client_socket);
 	}
+}
+
+void *processRequest(void *client_socket)
+{
+    printf("processing client request\n");
+
+    // get the command length
+    char packet_length_bytes[4];
+    receiveFully(client_socket, packet_length_bytes, 4);
+
+    printBinaryArray(packet_length_bytes, 4);
+
+    int packet_length = toInteger32(packet_length_bytes);
+    printf("packet_length_bytes = %d", packet_length);
+
+    // allocate buffer to receive the data
+    char *buffer = (char *)malloc(packet_length);
+    receiveFully(client_socket, buffer, packet_length);
+
+    // convert to upper case
+    convertUpperCase(buffer, packet_length);
+
+    // send back
+    send(client_socket, packet_length_bytes, 4, 0); // 4 bytes first
+    send(client_socket, buffer, packet_length, 0);
+
+    // release buffer
+    free(buffer);
+
+    printf("done with client request %d \n", client_socket);
 }
 
 void convertUpperCase(char *buffer, int length)
