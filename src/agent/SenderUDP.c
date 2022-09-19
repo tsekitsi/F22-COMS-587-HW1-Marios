@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
     beacon.StartUpTime = 1663432187;
     beacon.CmdPort     = 2336;
     for(int i = 0; i < 4; i++) {
-        beacon.IP[i] = 1;
+        beacon.IP[i] = i+1;
     }
 
     // Load buf:

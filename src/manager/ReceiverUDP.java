@@ -18,9 +18,7 @@ public class ReceiverUDP {
                 // Make a copy of the data array to pass to processor:
                 System.arraycopy(incoming.getData(), 0, data, 0, data.length);
                 // Pass the data to processor:
-                //new DataProcessor(data).start();
-
-                System.out.println(new String(data));
+                new BeaconProcessor(data).start();
             }
         } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());
@@ -33,3 +31,4 @@ public class ReceiverUDP {
         listen(4444);
     }
 }
+
