@@ -101,6 +101,7 @@ int receive_one_byte(int client_socket, char *cur_char)
 	while (bytes_received != 1)
 	{
 		bytes_received = recv(client_socket, cur_char, 1, 0);
+        printf("%d ", *cur_char);
 	}
 
 	return 1;
@@ -116,6 +117,8 @@ int receiveFully(int client_socket, char *buffer, int length)
 	    cur_char++;
 	    bytes_received++;
 	}
+
+    printf("%d bytes received. \n", bytes_received);
 
 	return 1;
 }
